@@ -1,0 +1,9 @@
+.categories-bar {
+  height: 300px;
+  li {
+    float: left;
+  }
+}
+.categories {
+  list-style-type: none;
+}

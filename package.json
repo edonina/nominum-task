@@ -9,51 +9,26 @@
         "@testing-library/user-event": "^7.1.2",
         "axios": "^0.19.2",
         "classnames": "^2.2.6",
-        "eslint": "^6.8.0",
         "font-awesome": "^4.7.0",
         "node-sass": "^4.13.1",
+        "npm-run-all": "^4.1.5",
         "prettier": "^1.19.1",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
         "react-redux": "^7.2.0",
         "react-scripts": "3.4.0",
-        "react-tooltip": "^4.1.2"
+        "react-tooltip": "^4.1.2",
+        "rxjs-compat": "^6.5.4"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "run-p serve server",
+        "serve": "react-scripts start",
+        "server": "json-server --watch db.json --port 8080",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "eslint .",
         "lint:fix": "eslint --fix ."
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "plugin:prettier/recommended"
-        ]
-    },
-    "prettier": {
-        "printWidth": 90,
-        "bracketSpacing": false,
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "tabWidth": 4
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.+(js|jsx)": [
-            "eslint --fix",
-            "git add"
-        ],
-        "*.+(json|css|md)": [
-            "prettier --write",
-            "git add"
-        ]
     },
     "browserslist": {
         "production": [
@@ -68,6 +43,8 @@
         ]
     },
     "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-plugin-react": "^7.19.0",
         "husky": "^4.2.3",
         "lint-staged": "^10.0.8"
     }
