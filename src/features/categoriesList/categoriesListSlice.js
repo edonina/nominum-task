@@ -1,66 +1,67 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-    name: 'categories',
+    name: "categories",
     initialState: {
         categoriesList: [],
         isApprovedFilterApplied: false,
         isForbiddenFilterApplied: false,
-        loading: 'idle',
+        loading: "idle"
     },
     reducers: {
-        categoriesLoading(state, action) {
-            // Use a "state machine" approach for loading state instead of booleans
-            if (state.loading === 'idle') {
-                state.loading = 'pending';
-            }
-        },
         categoriesReceived(state, action) {
-            if (state.loading === 'pending') {
-                state.loading = 'idle';
-                state.categoriesList = action.payload.map(item => ({
-                    ...item,
-                    status: 'approved',
-                }));
-            }
+            state.categoriesList = action.payload.map(item => ({
+                ...item,
+                status: "approved"
+            }));
         },
         forbidAll(state, action) {
             state.categoriesList = state.categoriesList.map(item => ({
                 ...item,
-                status: 'forbidden',
+                status: "forbidden"
             }));
         },
         approveAll(state, action) {
             state.categoriesList = state.categoriesList.map(item => ({
                 ...item,
-                status: 'approved',
+                status: "approved"
             }));
         },
         toggleApprove(state, action) {
-            console.log('action.payload', action.payload);
             const status =
-                state.categoriesList[action.payload].status === 'approved'
-                    ? 'forbidden'
-                    : 'approved';
+                state.categoriesList[action.payload].status === "approved"
+                    ? "forbidden"
+                    : "approved";
             state.categoriesList[action.payload].status = status;
         },
         toggleApprovedFilter(state) {
             state.isApprovedFilterApplied = !state.isApprovedFilterApplied;
+            if (
+                state.isForbiddenFilterApplied === true &&
+                state.isApprovedFilterApplied === true
+            ) {
+                state.isForbiddenFilterApplied = false;
+            }
         },
         toggleForbiddenFilter(state) {
             state.isForbiddenFilterApplied = !state.isForbiddenFilterApplied;
-        },
-    },
+            if (
+                state.isForbiddenFilterApplied === true &&
+                state.isApprovedFilterApplied === true
+            ) {
+                state.isApprovedFilterApplied = false;
+            }
+        }
+    }
 });
 
 export const {
-    categoriesLoading,
     categoriesReceived,
     toggleForbiddenFilter,
     toggleApprovedFilter,
     approveAll,
     forbidAll,
-    toggleApprove,
+    toggleApprove
 } = slice.actions;
 
 // The function below is called a selector and allows us to select a value from
@@ -78,29 +79,35 @@ export const selectCategories = state => {
         }
 
         if (state.categories.isApprovedFilterApplied) {
-            return item.status === 'approved';
+            return item.status === "approved";
         }
         if (state.categories.isForbiddenFilterApplied) {
-            return item.status === 'forbidden';
+            return item.status === "forbidden";
         }
         return false;
     });
 };
 export const selectApprovedCategories = state => {
-    return state.categories.categoriesList.filter(item => item.status === 'approved');
+    return state.categories.categoriesList.filter(
+        item => item.status === "approved"
+    );
 };
 export const selectApprovedCategoriesAmmount = state => {
-    return state.categories.categoriesList.filter(item => item.status === 'approved')
-        .length;
+    return state.categories.categoriesList.filter(
+        item => item.status === "approved"
+    ).length;
 };
 
 export const selectForbiddenCategories = state => {
-    return state.categories.categoriesList.filter(item => item.status === 'forbidden');
+    return state.categories.categoriesList.filter(
+        item => item.status === "forbidden"
+    );
 };
 
 export const selectForbiddenCategoriesAmmount = state => {
-    return state.categories.categoriesList.filter(item => item.status === 'forbidden')
-        .length;
+    return state.categories.categoriesList.filter(
+        item => item.status === "forbidden"
+    ).length;
 };
 
 export const selectIsApprovedFilterApplied = state => {

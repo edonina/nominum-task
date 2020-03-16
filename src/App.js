@@ -1,11 +1,11 @@
-import React from 'react';
-import './styles/App.scss';
-import {CategoriesList} from './features/categoriesList/CategoriesList';
+import React from "react";
+import "./styles/App.scss";
+import { CategoriesContainer } from "./features/categoriesList/CategoriesContainer";
 
 function App() {
     return (
         <div className="App">
-            <CategoriesList />
+            <CategoriesContainer />
         </div>
     );
 }
