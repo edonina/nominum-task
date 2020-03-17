@@ -1,17 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const generateId = function() {
+    return (
+        "_" +
+        Math.random()
+            .toString(36)
+            .substr(2, 9)
+    );
+};
+
 export const slice = createSlice({
     name: "categories",
     initialState: {
         categoriesList: [],
         isApprovedFilterApplied: false,
-        isForbiddenFilterApplied: false,
-        loading: "idle"
+        isForbiddenFilterApplied: false
     },
     reducers: {
         categoriesReceived(state, action) {
             state.categoriesList = action.payload.map(item => ({
                 ...item,
+                id: generateId(),
                 status: "approved"
             }));
         },
@@ -21,18 +30,17 @@ export const slice = createSlice({
                 status: "forbidden"
             }));
         },
-        approveAll(state, action) {
+        approveAll(state) {
             state.categoriesList = state.categoriesList.map(item => ({
                 ...item,
                 status: "approved"
             }));
         },
         toggleApprove(state, action) {
-            const status =
-                state.categoriesList[action.payload].status === "approved"
-                    ? "forbidden"
-                    : "approved";
-            state.categoriesList[action.payload].status = status;
+            const item = state.categoriesList.find(item => {
+                return item.id === action.payload;
+            });
+            item.status = item.status == "approved" ? "forbidden" : "approved";
         },
         toggleApprovedFilter(state) {
             state.isApprovedFilterApplied = !state.isApprovedFilterApplied;

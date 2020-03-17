@@ -1,5 +1,9 @@
+$button-border-radius: 3px;
+$button-border: 1px solid #55c0e9;
+$button-padding: 3px;
+
 button {
-    border: 1px solid #55c0e9;
-    border-radius: 3px;
-    padding: 3px;
+    border: $button-border;
+    border-radius: $button-border-radius;
+    padding: $button-padding;
 }

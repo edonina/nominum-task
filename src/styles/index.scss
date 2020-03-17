@@ -1,32 +1,9 @@
-@import 'variables';
-@import 'font';
+@import "variables";
 
-$body-font-family: 'Open Sans', sans-serif;
-$body-font-size: 16px;
+@import "font";
+@import "icons";
 
-$fa-font-path: '~font-awesome/fonts';
-@import '~font-awesome/scss/font-awesome';
-.fa {
-    margin-right: 5px;
-}
-.fa-forbidden {
-    &:before {
-        color: red;
-    }
-}
-.fa-approved {
-    &:before {
-        color: green;
-    }
-}
+@import "common";
 
-.fa-border {
-    background-color: white;
-}
-
-body {
-    margin: 0;
-    font-family: $body-font-family;
-    font-weight: normal;
-    font-size: $body-font-size;
-}
+@import "app";
+@import "tooltip";

@@ -3,15 +3,14 @@ import { CategoryItem } from "./CategoryItem";
 
 export const CategoriesList = props => {
     const { categoriesList, onClick } = props.props;
-    if (categoriesList) {
+    if (categoriesList.length) {
         return (
-            <ul className="categoriesList">
-                {categoriesList.map((item, index) => (
+            <ul className="categories__list">
+                {categoriesList.map(item => (
                     <CategoryItem
-                        key={index}
+                        key={item.id}
                         props={{
                             item,
-                            index,
                             onClick
                         }}
                     />

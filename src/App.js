@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/App.scss";
+// "./styles/app.scss";
 import { CategoriesContainer } from "./features/categoriesList/CategoriesContainer";
 
 function App() {
